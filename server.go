@@ -22,23 +22,23 @@ type CustomerHandler struct {
 }
 
 func main() {
-	r := setupRouter()
-	r.Run()
+	router := setupRouter()
+	router.Run()
 }
 
 func setupRouter() *gin.Engine {
-	r := gin.Default()
+	router := gin.Default()
 
-	h := CustomerHandler{}
-	h.Initialize()
+	customerHandler := CustomerHandler{}
+	customerHandler.Initialize()
 
-	r.GET("/customers", h.GetAllCustomer)
-	r.GET("/customers/:id", h.GetCustomer)
-	r.POST("/customers", h.SaveCustomer)
-	r.PUT("/customers/:id", h.UpdateCustomer)
-	r.DELETE("/customers/:id", h.DeleteCustomer)
+	router.GET("/customers", customerHandler.GetAllCustomer)
+	router.GET("/customers/:id", customerHandler.GetCustomer)
+	router.POST("/customers", customerHandler.SaveCustomer)
+	router.PUT("/customers/:id", customerHandler.UpdateCustomer)
+	router.DELETE("/customers/:id", customerHandler.DeleteCustomer)
 
-	return r
+	return router
 }
 
 func (h *CustomerHandler) Initialize() {
